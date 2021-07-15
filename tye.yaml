@@ -1,0 +1,12 @@
+# tye application configuration file
+# read all about it at https://github.com/dotnet/tye
+#
+# when you've given us a try, we'd love to know what you think:
+#    https://aka.ms/AA7q20u
+#
+name: darp_istio
+services:
+- name: servicea
+  project: ServiceA/ServiceA.csproj
+- name: serviceb
+  project: ServiceB/ServiceB.csproj
