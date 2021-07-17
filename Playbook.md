@@ -167,6 +167,49 @@ curl http://192.168.64.14:31520/home
 
 You can also call the service from browser.
 
+## Define ingress rules
+The rules to allow and manage the traffic must be definied as virtual services, every service that will be able to access from outside the cluster, should have its own VirtualService defining it routes, it versions, it subsets, and so on. Don't forget to specified the gateway.
+
+Service A configuring:
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: vs-services-a
+spec:
+  hosts:
+  - "192.168.64.14" 
+  gateways:
+  - services-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /home
+    route: 
+    - destination:
+        host: servicea.default.svc.cluster.local
+```
+
+Service B configuring:
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: vs-services-b
+spec:
+  hosts:
+  - "192.168.64.14" 
+  gateways:
+  - services-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /weatherforecast
+    route: 
+    - destination:
+        host: serviceb.default.svc.cluster.local
+```
+
 ## References
 - [Dapr](https://docs.dapr.io/getting-started/install-dapr-cli/)
 - [Istio](https://istio.io/latest/docs/setup/getting-started/)
