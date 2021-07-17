@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -19,9 +20,12 @@ namespace ServiceA.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> GetAsync()
         {
-            return Ok("Call service b to get the weather forecast");       
+            var client = new HttpClient();
+            var result = await client.GetStringAsync("http://serviceb:5001/weatherforecast");
+
+            return Ok(result);       
         }
     }
 }

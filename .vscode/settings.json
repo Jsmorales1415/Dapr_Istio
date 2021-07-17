@@ -1,0 +1,10 @@
+{
+  "files.exclude": {
+    "src/BuildingBlocks/App.Common/bin": true,
+    "src/BuildingBlocks/App.Common/obj": true,
+    "src/Services/Revvy.Industries.API/bin": true,
+    "src/Services/Revvy.Industries.API/obj": true,
+    "src/Services/Identity/bin": true,
+    "src/Services/Identity/obj": true
+  }
+}
