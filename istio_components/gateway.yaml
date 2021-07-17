@@ -11,34 +11,39 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - "192.168.64.14"
+    - "192.168.64.14" #Minikube ip
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: services
+  name: vs-services-a
 spec:
   hosts:
   - "192.168.64.14" 
   gateways:
   - services-gateway
   http:
-  # - match:
-  #   - uri:
-  #       exact: /svc-a
-  #   - uri:
-  #       exact: /svc-b
-    # - uri:
-    #     exact: /logout
-    # - uri:
-    #     prefix: /api/v1/products
-  - route: 
+  - match:
+    - uri:
+        prefix: /home
+    route: 
     - destination:
         host: servicea.default.svc.cluster.local
-        port:
-          number: 5000
-  # - route: 
-  #   - destination:
-  #       host: servicea.default.svc.cluster.local
-  #       port:
-  #         number: 5000
+
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: vs-services-b
+spec:
+  hosts:
+  - "192.168.64.14" 
+  gateways:
+  - services-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /weatherforecast
+    route: 
+    - destination:
+        host: serviceb.default.svc.cluster.local
