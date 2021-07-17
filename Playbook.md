@@ -168,7 +168,7 @@ curl http://192.168.64.14:31520/home
 You can also call the service from browser.
 
 ## Define ingress rules
-The rules to allow and manage the traffic must be definied as virtual services, every service that will be able to access from outside the cluster, should have its own VirtualService defining it routes, it versions, it subsets, and so on. Don't forget to specified the gateway.
+The rules to allow and manage the traffic must be definied as virtual services, every service that will be able to access from outside the cluster, should have its own VirtualService defining it routes, it versions, it subsets, and so on. Don't forget to specified the gateway to which they will obey.
 
 Service A configuring:
 ```yaml
